@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #content { display: none; }
+    #chart-container { width: 80%; margin: auto; }
+  </style>
+</head>
+<body>
+
+<script>
+  // Ask for password
+  var password = prompt("Enter password to view the dashboard:");
+  
+  if (password === "12345") {
+    // If correct, show dashboard
+    document.getElementById("content").style.display = "block";
+  } else {
+    // If wrong, replace page with message
+    document.body.innerHTML = "<h1>Access Denied</h1>";
+  }
+</script>
+
+<!-- Hidden content shown only after password -->
+<div id="content">
+  <h2>Sales Dashboard</h2>
+
+  <label for="region">Choose a region:</label>
+  <select id="region">
+    <option value="all">All</option>
+    <option value="north">North</option>
+    <option value="south">South</option>
+  </select>
+
+  <div id="chart-container">
+    <canvas id="myChart"></canvas>
+  </div>
+
+  <script>
+    // Sample data
+    const salesData = {
+      north: [12, 19, 3, 5, 2, 3],
+      south: [5, 10, 15, 7, 11, 4],
+      all: [17, 29, 18, 12, 13, 7]
+    };
+
+    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    let chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Sales',
+          data: salesData.all,
+          backgroundColor: 'rgba(75, 192, 192, 0.5)'
+        }]
+      }
+    });
+
+    document.getElementById('region').addEventListener('change', function () {
+      const selected = this.value;
+      chart.data.datasets[0].data = salesData[selected];
+      chart.update();
+    });
+  </script>
+</div>
+
+</body>
+</html>
