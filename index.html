@@ -15,32 +15,11 @@
 <script>
   // Ask for password
   var password = prompt("Enter password to view the dashboard:");
-  
+
   if (password === "12345") {
     // If correct, show dashboard
     document.getElementById("content").style.display = "block";
-  } else {
-    // If wrong, replace page with message
-    document.body.innerHTML = "<h1>Access Denied</h1>";
-  }
-</script>
 
-<!-- Hidden content shown only after password -->
-<div id="content">
-  <h2>Sales Dashboard</h2>
-
-  <label for="region">Choose a region:</label>
-  <select id="region">
-    <option value="all">All</option>
-    <option value="north">North</option>
-    <option value="south">South</option>
-  </select>
-
-  <div id="chart-container">
-    <canvas id="myChart"></canvas>
-  </div>
-
-  <script>
     // Sample data
     const salesData = {
       north: [12, 19, 3, 5, 2, 3],
@@ -68,7 +47,27 @@
       chart.data.datasets[0].data = salesData[selected];
       chart.update();
     });
-  </script>
+
+  } else {
+    // If wrong, replace page with message
+    document.body.innerHTML = "<h1>Access Denied</h1>";
+  }
+</script>
+
+<!-- Hidden content shown only after password -->
+<div id="content">
+  <h2>Sales Dashboard</h2>
+
+  <label for="region">Choose a region:</label>
+  <select id="region">
+    <option value="all">All</option>
+    <option value="north">North</option>
+    <option value="south">South</option>
+  </select>
+
+  <div id="chart-container">
+    <canvas id="myChart"></canvas>
+  </div>
 </div>
 
 </body>
